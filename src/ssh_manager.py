@@ -28,10 +28,9 @@ def main():
     for c in cmp:
         if i != '' and int(i) == c.menue_id:
             subprocess.call(["ssh", c.host.strip(' \t\n\r')])
-            #subprocess.Popen("ssh " + c.host.strip(' \t\n\r'))
 
 """
-Makes sure that this other programs don't run the program
+Makes sure that other programs don't execute the main
 """
 if __name__ == '__main__':
         main()
