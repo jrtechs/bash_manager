@@ -10,7 +10,10 @@ INPUT_FILE = "/home/jeff/scripts/servers.txt"
 Computer = collections.namedtuple("Computer", ('host', 'menue_id'))
 
 def main():
-
+    """
+    This function inputs all the available hosts from a text file and prompts the user to connect to them
+    :return:
+    """
 
     cmp = []
     count = 1

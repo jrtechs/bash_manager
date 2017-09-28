@@ -38,18 +38,20 @@ def input_file():
     quotes = []
     with open(INPUT_FILE) as file:
         for line in file:
-            quotes.append(line.host.strip(' \t\n\r'))
+            quotes.append(line.strip(' \t\n\r'))
+    return quotes
 
 def main():
     """
     This function calls the welcome function, then it calls the cowsay function with a random quote.
     :return: None
     """
-    print_welcome_message()
 
     quotes = input_file()
 
     print_cowsay_message(quotes[random.randint(0,(len(quotes) -1))])
+
+    print_welcome_message()
 
 
 """
