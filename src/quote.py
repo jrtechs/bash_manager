@@ -10,7 +10,7 @@ import subprocess
 import random
 
 INPUT_FILE = "/home/jeff/scripts/quotes.txt"
-WELCOME_MESSAGE = "***************Jeff-Laptop*************"
+WELCOME_MESSAGE = "***************Jeff-Laptop***************"
 
 
 def print_cowsay_message(message):

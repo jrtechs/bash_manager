@@ -6,8 +6,20 @@ Jeffery Russell
 import subprocess
 import collections
 
+import quote
+
 INPUT_FILE = "/home/jeff/scripts/servers.txt"
 Computer = collections.namedtuple("Computer", ('host', 'menue_id'))
+WELCOME_MESSAGE = "***************Jeff-Laptop***************"
+
+def print_menu_option(s):
+    """
+
+    :param s:
+    :return:
+    """
+    space = " " * len(quote) - 4 - len(s)
+    print("* " + s + space + "*")
 
 def main():
     """
@@ -22,10 +34,11 @@ def main():
             cmp.append(Computer(line, count))
             count += 1
 
-    print("SSH manager V 0.1")
+    print("*          SSH manager V 0.1           *")
     for c in cmp:
-        print(str(c.menue_id) + ")", c.host)
-    print()
+        print_menu_option(str(c.menue_id) + ") " + c.host)
+
+    print("*" * len(WELCOME_MESSAGE))
     i = input("Enter number of computer to connect to or enter to exit:")
 
     for c in cmp:
