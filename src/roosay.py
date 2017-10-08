@@ -14,6 +14,8 @@ def main():
     """
     message  = ""
     for i in range(1, len(sys.argv)):
+        if len(message) > 0:
+            message += " "
         message += sys.argv[i]
 
     roo_say(message)
@@ -98,7 +100,7 @@ def print_roo():
 
 
 """
-If ran from command line this will call main which looks for command line arguments
+If ran from command line, this will call the main which looks for command line arguments
 """
 if __name__ == '__main__':
     main()

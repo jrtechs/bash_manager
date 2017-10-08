@@ -9,7 +9,9 @@ Jeffery Russell
 import subprocess
 import random
 import module
+import roosay
 
+"""Path to a text file containing quotes"""
 INPUT_FILE = "/home/jeff/scripts/quotes.txt"
 
 
@@ -22,6 +24,14 @@ def print_cowsay_message(message):
     subprocess.call(["cowsay", message])
 
 
+def print_roosay_message(message):
+    """
+    Calls the roosay command that prints an ascii roo with a message above it
+    :param message: a quote to print
+    :return:
+    """
+    roosay.roo_say(message)
+
 def main():
     """
     This function calls the welcome function, then it calls the cowsay function with a random quote.
@@ -29,7 +39,8 @@ def main():
     """
 
     quotes = module.input_file(INPUT_FILE)
-    print_cowsay_message(quotes[random.randint(0,(len(quotes) -1))])
+    #print_cowsay_message(quotes[random.randint(0,(len(quotes) -1))])
+    print_roosay_message(quotes[random.randint(0,(len(quotes) -1))])
 
 
 """
