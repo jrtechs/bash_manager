@@ -53,9 +53,13 @@ def main():
     print("*" * len(WELCOME_MESSAGE))
     i = input("Enter number of computer to connect to or enter to exit:")
 
-    for c in cmp:
-        if i != '' and int(i) == c.menue_id:
-            subprocess.call(["ssh", c.host])
+    if i == '':
+        subprocess.call(["clear"])
+    else:
+        for c in cmp:
+            if int(i) == c.menue_id:
+                subprocess.call(["ssh", c.host])
+
 
 """
 Makes sure that other programs don't execute the main

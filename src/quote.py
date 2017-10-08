@@ -32,7 +32,6 @@ def main():
     print_cowsay_message(quotes[random.randint(0,(len(quotes) -1))])
 
 
-
 """
 Makes sure that other programs don't execute the main
 """
