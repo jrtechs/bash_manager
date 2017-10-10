@@ -1,11 +1,9 @@
 #!/usr/bin/env node
 (function () {
-
     var DEFAULT_LEN, ROO, BUBBLE_TOP_CHAR,
         textToRoo;
 
     DEFAULT_LEN = 35;
-
     BUBBLE_TOP_CHAR = "-";
 
     roo = `
@@ -34,7 +32,7 @@
     }
 
     function rooify(text) {
-        var textLines, maxLineLength, finalOutput, bubbleHeader;
+        var textLines, finalOutput, bubbleHeader;
         finalOutput = "";
         textLines = lineify(DEFAULT_LEN)(text);
         bubbleHeader = new Array(DEFAULT_LEN+2).fill(BUBBLE_TOP_CHAR).join("");
@@ -44,6 +42,7 @@
         finalOutput += roo;
         return finalOutput;
     }
+
     if (process.stdin.isTTY) {
         textToRoo = process.argv.splice(2).join(" ");
         console.log(rooify(textToRoo));
@@ -53,6 +52,4 @@
         process.stdin.on('end', _ => console.log(rooify(textToRoo)));
         process.stdin.resume();
     }
-
-    module.exports = {lineify};
 }());
