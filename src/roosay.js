@@ -13,8 +13,7 @@
               __/ _\\  //
              '~( '~ )//
                _\\  '}/
-              \\"--~(/
-    `;
+              \\"--~(/`;
 
     function lineify(maxLen) {
         function bar([word, ...words], [line, ...lines]) {
