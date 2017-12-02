@@ -37,7 +37,7 @@ def print_message(message):
     :param message: the message to print
     :return: None
     """
-    print_list, max_len= convert_to_list(message)
+    print_list, max_len = convert_to_list(message)
 
     if len(print_list) > 0:
         "Print top"
