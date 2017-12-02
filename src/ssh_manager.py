@@ -156,7 +156,7 @@ def remove_host():
         count += 1
     for c in cmp:
         space = " " * (len(WELCOME_MESSAGE) - 3 - len(str(c.menu_id) + ") " + c.host))
-        print(print_red("*") + str(c.menue_id) + ") " + c.host + space + print_red("*"))
+        print(print_red("*") + str(c.menu_id) + ") " + c.host + space + print_red("*"))
 
     print(print_red("*" * len(WELCOME_MESSAGE)))
 
