@@ -52,6 +52,7 @@ def main():
 
     print_menu_option("A) Exit")
     print_menu_option("B) Manager tools")
+    print_menu_option("C) Socks Tunnel")
 
     print(print_magenta("*" * len(WELCOME_MESSAGE)))
     i = input("Enter number of computer to connect to or enter to exit:")
@@ -60,11 +61,46 @@ def main():
         exit_program()
     elif i == 'b' or i == 'B':
         sub_menu()
+    elif "C" == str.lower(i):
+        socks_ssh_tunnel()
     else:
         for c in cmp:
             if int(i) == c.menu_id:
                 subprocess.call(["ssh", c.host])
                 exit_program()
+
+
+def socks_ssh_tunnel():
+    """
+    prints user a menu to select a host to start a socks proxy with
+    :return: None
+    """
+    print_welcome_message()
+    file = module.input_file(INPUT_FILE)
+    cmp = []
+    count = 1
+    for line in file:
+        cmp.append(Computer(line, count))
+        count += 1
+
+    print(print_magenta("*") + "         " + print_green("Socks Tunnel") + "        " + print_magenta("*"))
+    for c in cmp:
+        print_menu_option(str(c.menu_id) + ") " + c.host)
+    print_menu_option("A) Exit")
+    print_menu_option("B) Main")
+    print(print_magenta("*" * len(WELCOME_MESSAGE)))
+    i = input("Enter number of computer to connect to or enter to exit:")
+    if i == '' or 'A' == str.lower(i):
+        exit_program()
+    elif 'B' == str.lower(i):
+        main()
+    else:
+        for c in cmp:
+            if int(i) == c.menu_id:
+                print_red("Starting socks proxy on " + c.host + ":8123")
+                subprocess.call(["ssh", "D", "8123", "f", "C", "q", "N", c.host])
+                exit_program()
+
 
 
 def print_sub_menu():
