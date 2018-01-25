@@ -9,7 +9,9 @@ import collections
 import module
 
 INPUT_FILE = "/home/jeff/scripts/servers.txt"
+
 Computer = collections.namedtuple("Computer", ('host', 'menu_id'))
+
 WELCOME_MESSAGE = "**************************************"
 
 
@@ -55,7 +57,7 @@ def main():
     print_menu_option("C) Socks Tunnel")
 
     print(print_magenta("*" * len(WELCOME_MESSAGE)))
-    i = input("Enter number of computer to connect to or enter to exit:")
+    i = input("Enter option:")
 
     if i == '' or i == 'A' or i == 'a':
         exit_program()
@@ -89,7 +91,7 @@ def socks_ssh_tunnel():
     print_menu_option("A) Exit")
     print_menu_option("B) Main")
     print(print_magenta("*" * len(WELCOME_MESSAGE)))
-    i = input("Enter number of computer to connect to or enter to exit:")
+    i = input("Enter option:")
     if i == '' or 'c' == str.lower(i):
         exit_program()
     elif 'c' == str.lower(i):
