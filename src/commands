@@ -1,0 +1,12 @@
+#backup commands
+rsync -xavHl --delete /run/media/jeff/Stuff/ /run/media/jeff/Backup/Sync/
+
+#sets bash profile for user
+chsh -s /bin/bash username
+
+#terminates screen
+screen -X -S [session # you want to kill] quit
+
+
+#ssh socks proxy
+ssh -D 8123 -f -C -q -N sammy@example.com
