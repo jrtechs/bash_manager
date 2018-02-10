@@ -25,7 +25,7 @@ def print_welcome_message():
 
 def print_menu_option(s):
     """
-
+    Prints each host option
     :param s:
     :return:
     """
@@ -175,9 +175,26 @@ def copy_ssh_key():
     calls systems ssh-copy-id with host name
     :return: None
     """
-    host = input("Enter user@host or -1 to exit:")
-    if host != '-1':
-        subprocess.call(["ssh-copy-id", host])
+
+    print_welcome_message()
+    file = module.input_file(INPUT_FILE)
+    cmp = []
+    count = 1
+    for line in file:
+        cmp.append(Computer(line, count))
+        count += 1
+
+    print(print_magenta("*") + "         " + print_green("Copy SSH Key") + "             " + print_magenta("*"))
+    for c in cmp:
+        print_menu_option(str(c.menu_id) + ") " + c.host)
+
+    print_welcome_message()
+    host_id = input("Enter number of host to copy ssh key to:")
+    if host_id != '-1':
+        for c in cmp:
+            if c.menu_id == int(host_id):
+                subprocess.call(["ssh-copy-id", c.host])
+    print("Host not found in list!")
 
 
 def remove_host():
