@@ -17,7 +17,13 @@ def main():
         if len(message) > 0:
             message += " "
         message += sys.argv[i]
+    
+    for line in sys.stdin:
+        message+= line.rstrip()
+        print(line)
 
+    message = " ".join(message.split())
+    print(message)
     roo_say(message)
 
 
@@ -49,11 +55,14 @@ def print_message(message):
         else:
             for i in range(0, len(print_list)):
                 if i == 0:
-                    print("/ " + print_list[i] + " " * (max_len - len(print_list[i])) +" \\")
+                    print("/ " + print_list[i] 
+                        + " " * (max_len - len(print_list[i])) +" \\")
                 elif i == len(print_list) -1:
-                    print("\ " + print_list[i] + " " * (max_len - len(print_list[i])) + " /")
+                    print("\ " + print_list[i]
+                        + " " * (max_len - len(print_list[i])) + " /")
                 else:
-                    print("| " + print_list[i] + " " * (max_len - len(print_list[i])) + " |")
+                    print("| " + print_list[i] 
+                        + " " * (max_len - len(print_list[i])) + " |")
         "print bottom"
         print(" " + "-" * (max_len + 2))
     else:
@@ -62,7 +71,8 @@ def print_message(message):
 
 def convert_to_list(message):
     """
-    Converts the message into string lines which are less than 35 characters - easier for printing
+    Converts the message into string lines which are 
+    less than 35 characters - easier for printing
     :param message: the string message
     :return: the list of the string lines and the length of the longest line
     """

@@ -35,7 +35,8 @@ def print_menu_option(s):
 
 def main():
     """
-    This function inputs all the available hosts from a text file and prompts the user to connect to them
+    This function inputs all the available hosts from a text file and 
+    prompts the user to connect to them
     :return:
     """
     print_welcome_message()
@@ -48,7 +49,8 @@ def main():
         cmp.append(Computer(line, count))
         count += 1
 
-    print(print_magenta("*") + "         " + print_green("SSH manager V 0.2") + "        " + print_magenta("*"))
+    print(print_magenta("*") + "         " + 
+        print_green("SSH manager V 0.2") + "        " + print_magenta("*"))
     for c in cmp:
         print_menu_option(str(c.menu_id) + ") " + c.host)
 
@@ -85,7 +87,8 @@ def socks_ssh_tunnel():
         cmp.append(Computer(line, count))
         count += 1
 
-    print(print_magenta("*") + "         " + print_green("Socks Tunnel") + "             " + print_magenta("*"))
+    print(print_magenta("*") + "         " + 
+            print_green("Socks Tunnel") + "             " + print_magenta("*"))
     for c in cmp:
         print_menu_option(str(c.menu_id) + ") " + c.host)
     print_menu_option("A) Exit")
@@ -111,7 +114,8 @@ def print_sub_menu():
     :return: None
     """
     print(print_magenta("**************************************"))
-    print(print_magenta("*") + print_green("Options") + "                           " + print_magenta("*"))
+    print(print_magenta("*") + print_green("Options") + 
+        "                           " + print_magenta("*"))
     print_menu_option("1) Add Host")
     print_menu_option("2) Copy SSH key to server")
     print_menu_option("3) Remove host name")
@@ -131,7 +135,8 @@ def print_red(prt): return "\033[91m {}\033[00m" .format(prt)
 
 def sub_menu():
     """
-    calls printSubMenu and then gets input from user to make appropriate function calls
+    calls printSubMenu and then gets input from user to 
+    make appropriate function calls
     :return: None
     """
     print_sub_menu()
@@ -184,7 +189,8 @@ def copy_ssh_key():
         cmp.append(Computer(line, count))
         count += 1
 
-    print(print_magenta("*") + "         " + print_green("Copy SSH Key") + "             " + print_magenta("*"))
+    print(print_magenta("*") + "         " + 
+        print_green("Copy SSH Key") + "             " + print_magenta("*"))
     for c in cmp:
         print_menu_option(str(c.menu_id) + ") " + c.host)
 
@@ -210,8 +216,10 @@ def remove_host():
         cmp.append(Computer(line, count))
         count += 1
     for c in cmp:
-        space = " " * (len(WELCOME_MESSAGE) - 3 - len(str(c.menu_id) + ") " + c.host))
-        print(print_red("*") + str(c.menu_id) + ") " + c.host + space + print_red("*"))
+        space = " " * (len(WELCOME_MESSAGE) - 3 - 
+                len(str(c.menu_id) + ") " + c.host))
+        print(print_red("*") + str(c.menu_id) + ") " + 
+            c.host + space + print_red("*"))
 
     print(print_red("*" * len(WELCOME_MESSAGE)))
 
@@ -226,4 +234,7 @@ def remove_host():
 Makes sure that other programs don't execute the main
 """
 if __name__ == '__main__':
+    try:
         main()
+    except KeyboardInterrupt:
+        exit_program();
