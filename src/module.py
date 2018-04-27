@@ -3,6 +3,8 @@ Jeffery Russell
 9/29/17
 """
 
+import subprocess
+
 
 def input_file(file_name):
     """
@@ -41,3 +43,10 @@ def remove_line_from_file(file_name, remove):
         if remove not in host:
             f.write(host + "\n")
     f.close()
+
+
+def create_empty_file(file_name):
+    """
+    simple function to mimic touch command
+    """
+    subprocess.call(['touch', file_name])

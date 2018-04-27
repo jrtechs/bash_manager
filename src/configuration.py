@@ -1,0 +1,124 @@
+"""
+Jeffery Russell
+4-27-18
+
+Deals with the configuration file for bash manager
+
+Config file:
+servers: /path/to/servers
+quotes: /path/to/quotes.txt
+mounts: /path/to/ssh/mounts.txt
+
+
+config dictionary
+{servers: "/", quotes: "/", mounts:"/"}
+"""
+
+import subprocess
+import collections
+import os.path
+
+import module
+
+CONFIG_FILE = os.path.abspath(__file__) + "/config.txt"
+
+
+def config_exists():
+    """
+    Function which checks to see if the config file exists
+    :return: whether file returns
+    """
+    if not os.path.exists(CONFIG_FILE):
+        print("config file not found in " + CONFIG_FILE)
+
+
+def single_conf_input(param):
+    """
+    helper function for create_config() which reads the value of a single
+    file location from the user
+    """
+    print("Please enter the absolute path for your " + param + " file")
+    print("if you leave this blank, by default it will be " 
+        + os.path.abspath(__file__) + "/" + param + ".txt")
+    i = input(":")
+    if i.strip() == "":
+        return os.path.abspath(__file__) + "/" + param + ".txt"
+    else:
+        return i
+
+
+def create_config():
+    """
+    Creates a new configuration file
+    """
+    print("Creating new configuration file under " + CONFIG_FILE)
+
+    f = open(CONFIG_FILE, "W")
+    f.write(single_conf_input("servers") + "\n")
+    f.write(single_conf_input("quotes") + "\n")
+    f.write(single_conf_input("mounts") + "\n")
+    f.close()
+
+def read_config():
+    """
+    Reads the config file and creates a config dictionary
+    """
+    config = {}
+    temp = []
+    with open(CONFIG_FILE) as file:
+        for line in file:
+            if line.find("servers:") != -1:
+                temp = line.split(" ")
+                if len(temp) <= 1:
+                    print("Error reading servers file from config")
+                    return
+                config.servers = temp[1]
+            if line.find("quotes:") != -1:
+                if len(temp) <= 1:
+                    print("Error reading quotes file from config")
+                    return
+                config.quotes = temp[1]
+            if line.find("mounts:") != -1:
+                if len(temp) <= 1:
+                    print("Error reading mounts file from config")
+                    return
+                config.mounts = temp[1]
+
+
+def valid_config(config):
+    """
+    Checks to see if a configuration is valid
+    """
+    return 'servers' in config and 'quotes' in config and 'mounts' in config
+
+def create_config_dependent_files(config):
+    """
+    Finds missing files and creates them
+    """
+    if not os.path.exists(config.servers):
+        print("Creating missing servers file in " + config.servers)
+        module.create_empty_file(config.servers)
+    if not os.path.exists(config.quotes):
+        print("Creating missing quotes file in " + config.quotes)
+        module.create_empty_file(config.quotes)
+    if not os.path.exists(config.mounts):
+        print("Creating missing mounts file in " + config.mounts)
+        module.create_empty_file(config.mounts)
+
+
+def get_config():
+    """
+    Returns the config file for the main to use
+    """
+    if not config_exists():
+        module.create_empty_file(CONFIG_FILE)
+        create_config()
+    create_config_dependent_files()
+    config = read_config()
+    if valid_config(config):
+        return config
+
+        
+
+
+
