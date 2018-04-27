@@ -10,3 +10,13 @@ screen -X -S [session # you want to kill] quit
 
 #ssh socks proxy
 ssh -D 8123 -f -C -q -N sammy@example.com
+
+#!/bin/sh
+
+echo starting to mount
+
+sshfs -o allow_other jeff@192.168.1.2:/mnt/jeff/jeffery/ /home/jeff/media
+
+sshfs -o allow_other public@192.168.1.2:/mnt/jeff/public/ /home/jeff/publicDrive 
+
+echo mount successful

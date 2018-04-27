@@ -19,11 +19,9 @@ def main():
         message += sys.argv[i]
     
     for line in sys.stdin:
-        message+= line.rstrip()
-        print(line)
+        message+= line
 
     message = " ".join(message.split())
-    print(message)
     roo_say(message)
 
 
