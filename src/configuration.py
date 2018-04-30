@@ -20,7 +20,7 @@ import os.path
 
 import module
 
-CONFIG_FILE = os.path.abspath(__file__) + "/config.txt"
+CONFIG_FILE = os.path.dirname(__file__) + "/config.txt"
 
 
 def config_exists():
@@ -30,6 +30,8 @@ def config_exists():
     """
     if not os.path.exists(CONFIG_FILE):
         print("config file not found in " + CONFIG_FILE)
+        return False
+    return True
 
 
 def single_conf_input(param):
@@ -37,14 +39,18 @@ def single_conf_input(param):
     helper function for create_config() which reads the value of a single
     file location from the user
     """
-    print("Please enter the absolute path for your " + param + " file")
-    print("if you leave this blank, by default it will be " 
-        + os.path.abspath(__file__) + "/" + param + ".txt")
-    i = input(":")
-    if i.strip() == "":
-        return os.path.abspath(__file__) + "/" + param + ".txt"
-    else:
-        return i
+    print("\nPlease enter the absolute path for your " + param + " file")
+    print("if you leave this blank, by default it will be "  
+        + os.path.dirname(__file__) + "/" + param + ".txt")
+    # i = input("Enter selection:")
+
+    
+    # if i.strip() == "":
+    #     return os.path.dirname(__file__) + "/" + param + ".txt"
+    # else:
+    #     return i
+
+    return param + ": " + os.path.dirname(__file__) + "/" + param + ".txt"
 
 
 def create_config():
@@ -53,10 +59,10 @@ def create_config():
     """
     print("Creating new configuration file under " + CONFIG_FILE)
 
-    f = open(CONFIG_FILE, "W")
-    f.write(single_conf_input("servers") + "\n")
-    f.write(single_conf_input("quotes") + "\n")
-    f.write(single_conf_input("mounts") + "\n")
+    f = open(CONFIG_FILE, "w")
+    f.write(single_conf_input("servers") + '\n')
+    f.write(single_conf_input("quotes") + '\n')
+    f.write(single_conf_input("mounts") + '\n')
     f.close()
 
 def read_config():
@@ -67,22 +73,23 @@ def read_config():
     temp = []
     with open(CONFIG_FILE) as file:
         for line in file:
+            temp = line.split(" ")
             if line.find("servers:") != -1:
-                temp = line.split(" ")
                 if len(temp) <= 1:
                     print("Error reading servers file from config")
                     return
-                config.servers = temp[1]
+                config["servers"] = temp[1]
             if line.find("quotes:") != -1:
                 if len(temp) <= 1:
                     print("Error reading quotes file from config")
                     return
-                config.quotes = temp[1]
+                config["quotes"] = temp[1]
             if line.find("mounts:") != -1:
                 if len(temp) <= 1:
                     print("Error reading mounts file from config")
                     return
-                config.mounts = temp[1]
+                config["mounts"] = temp[1]
+    return config
 
 
 def valid_config(config):
@@ -95,15 +102,15 @@ def create_config_dependent_files(config):
     """
     Finds missing files and creates them
     """
-    if not os.path.exists(config.servers):
-        print("Creating missing servers file in " + config.servers)
-        module.create_empty_file(config.servers)
-    if not os.path.exists(config.quotes):
-        print("Creating missing quotes file in " + config.quotes)
-        module.create_empty_file(config.quotes)
-    if not os.path.exists(config.mounts):
-        print("Creating missing mounts file in " + config.mounts)
-        module.create_empty_file(config.mounts)
+    if not os.path.exists(config["servers"]):
+        print("Creating missing servers file in " + config["servers"])
+        module.create_empty_file(config["servers"])
+    if not os.path.exists(config["quotes"]):
+        print("Creating missing quotes file in " + config["quotes"])
+        module.create_empty_file(config["quotes"])
+    if not os.path.exists(config["mounts"]):
+        print("Creating missing mounts file in " + config["mounts"])
+        module.create_empty_file(config["mounts"])
 
 
 def get_config():
@@ -113,10 +120,15 @@ def get_config():
     if not config_exists():
         module.create_empty_file(CONFIG_FILE)
         create_config()
-    create_config_dependent_files()
     config = read_config()
+
     if valid_config(config):
+        create_config_dependent_files(config)
+        
         return config
+    else:
+        create_config()
+        return get_config()
 
         
 

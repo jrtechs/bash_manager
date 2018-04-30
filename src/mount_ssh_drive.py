@@ -5,6 +5,7 @@ Jeffery Russell
 
 import subprocess
 import collections
+import sys
 
 import module
 import configuration
@@ -17,7 +18,7 @@ user@remote.server.address
 /remote/mount/point
 /local/mount/point
 """
-MOUNT_FILE = configuration.get_config().mounts
+MOUNT_FILE = configuration.get_config()["mounts"]
 
 
 def add_drive_to_config(remote_connection, remote_mount_point, local_mount_point):
@@ -104,4 +105,4 @@ if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt:
-        exit_program()
+        exit()
