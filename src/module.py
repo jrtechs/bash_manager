@@ -4,6 +4,7 @@ Jeffery Russell
 """
 
 import subprocess
+import os.path
 
 
 def input_file(file_name):
@@ -25,6 +26,7 @@ def append_file(file_name, append):
     :param append: message to append on file
     :return: None
     """
+    file_name = os.path.expanduser(file_name)
     f = open(file_name, "a+")
     f.write(append + "\n")
     f.close()

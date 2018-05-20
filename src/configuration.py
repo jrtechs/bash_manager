@@ -43,8 +43,7 @@ def single_conf_input(param):
     print("by default it will be "  
         + os.path.dirname(__file__) + "/" + param + ".txt")
     i = input("Enter selection:")
-
-    
+  
     if i.strip() == "":
         return  param + ": " + os.path.dirname(__file__) + "/" + param + ".txt"
     else:
@@ -133,7 +132,105 @@ def get_config():
         create_config()
         return get_config()
 
-        
+
+def generate_bash_aliases():
+    """
+    Generates the bash aliases to add to the bash congig
+    :return: list of strings with bash aliases
+    """
+    aliases = []
+    path = os.path.dirname(os.path.abspath(__file__)) + "/"
+    aliases.append("alias roosay=\"python3 " + path + "roosay.py\"")
+    aliases.append("alias ss=\"python3 " + path + "ssh_manager.py\"")
+    aliases.append("alias ssh_manager=\"python3 " + path + "ssh_manager.py\"")
+    aliases.append("alias mm=\"python3 " + path + "mount_ssh_drive.py\"")
+    aliases.append("alias ssh-mount=\"python3 " + path + "mount_ssh_drive.py\"")
+    aliases.append("alias quote=\"python3 " + path + "quote.py\"")
+
+    return aliases
 
 
+def generate_extra_sauce():
+    """
+    Creates a list of bash configurations things that I use
+    :return: string list with all my extra bash sauce
+    """
+    sauce = []
 
+    sauce.append("alias ls=\"ls -abp --color=auto\"")
+    sauce.append("function cd {")
+    sauce.append("\tbuiltin cd \"$@\" && ls")
+    sauce.append("}")
+    sauce.append("quote")
+
+    return sauce
+
+
+def view_shell_sauce():
+    """
+    Displays the output of generate_bash_aliases() and generate_extra_sauce()
+    """
+    print("\n#Bash Aliases:")
+
+    for line in generate_bash_aliases():
+        print(line)
+
+    print("\n")
+    print("#Extra Sauce")
+
+    for line in generate_extra_sauce():
+        print(line)
+
+
+def write_to_bash_config(sauce):
+    """
+    prompts user for name of shell config file and write contents of
+    sauce to it
+    """
+    path = input("Enter name of shell (.bashrc or .zshrc):")
+    path = "~/" + path
+
+    for line in sauce:
+        module.append_file(path, line)
+
+    print("Added the following to " + path)
+
+    for line in sauce:
+        print("\t" + line)
+
+
+def main():
+    """
+    Prompts user to either update the config file, or make aliases
+    in the bash configuration
+    """
+
+    options = []
+    options.append("1) Update Configuration File")
+    options.append("2) Make Aliases")
+    options.append("3) Add Extra Sauce")
+    options.append("4) View proposed shell conf")
+    options.append("5) Exit")
+    i = '0'
+
+    while i != '5':
+        module.print_menu("Configuration Manager", options)
+        i = input("Enter Option:")
+        if i == '1':
+            create_config()
+        elif i == '2':
+            write_to_bash_config(generate_bash_aliases())
+        elif i == '3':
+            write_to_bash_config(generate_extra_sauce())
+        elif i == '4':
+            view_shell_sauce()
+
+
+"""
+Makes sure that other programs don't execute the main
+"""
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        pass

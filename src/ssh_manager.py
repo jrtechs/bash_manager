@@ -208,4 +208,4 @@ if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt:
-        exit_program();
+        exit_program()
