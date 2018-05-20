@@ -69,7 +69,7 @@ def unmount_all_drives():
 
 def remove_drive():
     """
-
+    Prompts the user and removes a drive from MOUNT_FILE
     """
     options = []
     file = module.input_file(MOUNT_FILE)
