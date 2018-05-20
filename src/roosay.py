@@ -18,8 +18,9 @@ def main():
             message += " "
         message += sys.argv[i]
     
-    for line in sys.stdin:
-        message+= line
+    if len(message) == 0:
+        for line in sys.stdin:
+            message+= line
 
     message = " ".join(message.split())
     roo_say(message)
@@ -108,7 +109,8 @@ def print_roo():
 
 
 """
-If ran from command line, this will call the main which looks for command line arguments
+If ran from command line, this will call the main which 
+looks for command line arguments
 """
 if __name__ == '__main__':
     main()

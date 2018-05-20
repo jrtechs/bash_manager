@@ -39,18 +39,16 @@ def single_conf_input(param):
     helper function for create_config() which reads the value of a single
     file location from the user
     """
-    print("\nPlease enter the absolute path for your " + param + " file")
-    print("if you leave this blank, by default it will be "  
+    print("\nPlease enter the absolute path for your " + param + " file if you leave this blank,")
+    print("by default it will be "  
         + os.path.dirname(__file__) + "/" + param + ".txt")
-    # i = input("Enter selection:")
+    i = input("Enter selection:")
 
     
-    # if i.strip() == "":
-    #     return os.path.dirname(__file__) + "/" + param + ".txt"
-    # else:
-    #     return i
-
-    return param + ": " + os.path.dirname(__file__) + "/" + param + ".txt"
+    if i.strip() == "":
+        return  param + ": " + os.path.dirname(__file__) + "/" + param + ".txt"
+    else:
+        return param + ": " + i
 
 
 def create_config():
@@ -65,6 +63,7 @@ def create_config():
     f.write(single_conf_input("mounts") + '\n')
     f.close()
 
+
 def read_config():
     """
     Reads the config file and creates a config dictionary
@@ -74,6 +73,10 @@ def read_config():
     with open(CONFIG_FILE) as file:
         for line in file:
             temp = line.split(" ")
+
+            if len(temp) >= 1:
+                temp[1] = temp[1].strip('\n')
+
             if line.find("servers:") != -1:
                 if len(temp) <= 1:
                     print("Error reading servers file from config")
@@ -102,13 +105,13 @@ def create_config_dependent_files(config):
     """
     Finds missing files and creates them
     """
-    if not os.path.exists(config["servers"]):
+    if os.path.isfile(config["servers"]) == False:
         print("Creating missing servers file in " + config["servers"])
         module.create_empty_file(config["servers"])
-    if not os.path.exists(config["quotes"]):
+    if os.path.isfile(config["quotes"]) == False:
         print("Creating missing quotes file in " + config["quotes"])
         module.create_empty_file(config["quotes"])
-    if not os.path.exists(config["mounts"]):
+    if os.path.isfile(config["mounts"]) == False:
         print("Creating missing mounts file in " + config["mounts"])
         module.create_empty_file(config["mounts"])
 

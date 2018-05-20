@@ -7,8 +7,10 @@ import subprocess
 import collections
 
 import module
+import configuration
 
-INPUT_FILE = "/home/jeff/scripts/servers.txt"
+#INPUT_FILE = "/home/jeff/scripts/servers.txt"
+INPUT_FILE = configuration.get_config()["servers"]
 
 Computer = collections.namedtuple("Computer", ('host', 'menu_id'))
 

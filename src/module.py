@@ -12,7 +12,7 @@ def input_file(file_name):
     :return: a string array containing the lines of INPUT_FILE
     """
     f = []
-    with open(file_name) as file:
+    with open(file_name.strip('\n')) as file:
         for line in file:
             f.append(line.strip(' \t\n\r'))
     return f
@@ -49,4 +49,40 @@ def create_empty_file(file_name):
     """
     simple function to mimic touch command
     """
+    file_name = file_name.replace('\n', '')
     subprocess.call(['touch', file_name])
+
+
+TOP_BAR = "**************************************"
+
+
+def print_magenta(prt): return"\033[95m {}\033[00m" .format(prt)
+
+
+def print_green(prt): return "\033[92m {}\033[00m" .format(prt)
+
+
+def print_red(prt): return "\033[91m {}\033[00m" .format(prt)
+
+
+def print_menu_option(s):
+    """
+    Prints each host option
+    :param s:
+    :return:
+    """
+    space = " " * (len(TOP_BAR) - 4 - len(s))
+    print(print_magenta("* ") + s + space + print_magenta("*"))  
+
+
+def print_menu(name, lines):
+    """
+
+    """
+    print(print_magenta(TOP_BAR))
+    print(print_magenta("*") + "         " + 
+    print_green(name) + "        " + print_magenta("*"))
+
+    for s in lines:
+        print_menu_option(s)
+    print(print_magenta(TOP_BAR))
