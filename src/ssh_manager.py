@@ -9,7 +9,6 @@ import collections
 import module
 import configuration
 
-#INPUT_FILE = "/home/jeff/scripts/servers.txt"
 INPUT_FILE = configuration.get_config()["servers"]
 
 Computer = collections.namedtuple("Computer", ('host', 'menu_id'))
@@ -61,7 +60,7 @@ def main():
     print_menu_option("C) Socks Tunnel")
 
     print(print_magenta("*" * len(WELCOME_MESSAGE)))
-    i = input("Enter option:")
+    i = input("Enter Option:")
 
     if i == '' or i == 'A' or i == 'a':
         exit_program()

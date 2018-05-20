@@ -50,7 +50,12 @@ def unmount_drive(local_mount_point):
     """
     UnMounts a drive from a computer
     """
-    subprocess.call(["fusermount", "-u", local_mount_point])
+    runCode = subprocess.call(["fusermount", "-u", local_mount_point])
+
+    if runCode == 0:
+        print("Un-Mounted " + local_mount_point)
+    else:
+        print("Failed to Un-Mount " + local_mount_point)
 
 
 def unmount_all_drives():
@@ -73,7 +78,20 @@ def remove_drive():
     
     options.append("A) Exit")
 
-    module.print_menu("SSH Drive Manager", options)
+    module.print_menu("Remove SSH Drive", options)
+
+    i = input("Enter Option:")
+
+    if i.lower() != 'a' and int(i) <= len(file)/3 and int(i) > 0:
+        index = (int(i) - 1) * 3
+
+        f = open(MOUNT_FILE, "w")
+        for x in range(0, len(file), 3):
+            if index != x:
+                f.write(file[x] + "\n")
+                f.write(file[x + 1] + "\n")
+                f.write(file[x + 2] + "\n")
+        f.close()
 
 
 def add_drive_to_config(remote_connection, remote_mount_point, local_mount_point):
@@ -95,13 +113,30 @@ def add_drive():
     add_drive_to_config(ssh_acct, remote_mount, local_mount)
 
 
+def view_drives():
+    """
+    Views the current drives to the user
+    """
+    drives = []
+    file = module.input_file(MOUNT_FILE)
+    for i in range(0, len(file), 3):
+        drives.append(str(int(int(i)/3 + 1)) + ") " + file[i])
+        drives.append("   " + file[i + 1])
+        drives.append("   " + file[i + 2])
+    module.print_menu("SSH Drives", drives)
+
+
 def print_mount_menu():
     """
     Displays box which has mount menu options
     """
-    module.print_menu("SSH Drive Manager", ["1) Remove Remote Drive",
-                                            "2) Add Drive to Mount",
-                                            "3) Exit"])
+    module.print_menu("SSH Drive Manager", ["1) Mount SSH Drives",
+                                            "2) Un-Mount SSH Drives",
+                                            "3) Remove Remote Drive",
+                                            "4) Add Drive to Mount",
+                                            "5) View Drives",
+                                            "6) Usage",
+                                            "7) Exit"])
 
 
 def manage_mount_file():
@@ -110,15 +145,27 @@ def manage_mount_file():
     """
     print_mount_menu()
     i = input("Enter Option:")
-    while i != '3':
-        if i == '2':
+    while i != '7':
+        if i == '4':
             add_drive()
-        elif i == '1':
+        elif i == '3':
             remove_drive()
+        elif i == '5':
+            view_drives()
+        elif i == '1':
+           mount_drives()
+        elif i == '2':
+            unmount_all_drives()
+        elif i == '6':
+            print_usage()
         else:
             print("Invalid Option")
-        print_mount_menu()
-        i = input("Enter Option:")
+
+        if i != '1' and i != '2':
+            print_mount_menu()
+            i = input("Enter Option:")
+        else:
+            break
 
 
 def print_usage():
@@ -128,7 +175,6 @@ def print_usage():
     print("Usage:")
     print("\t-m mounts drives to computer")
     print("\t-u unmounts drives from the computer")
-    print("\t-e manages config file with drives to mount")
 
 
 def main():
@@ -140,12 +186,11 @@ def main():
             mount_drives()
         elif sys.argv[1].lower() == "-u":
             unmount_all_drives()
-        elif sys.argv[1].lower() == "-e":
-            manage_mount_file()
         else:
+            print("Invalid Command")
             print_usage()
     else:
-        print_usage()
+        manage_mount_file()
 
 
 """

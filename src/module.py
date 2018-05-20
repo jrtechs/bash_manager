@@ -47,7 +47,7 @@ def remove_line_from_file(file_name, remove):
 
 def create_empty_file(file_name):
     """
-    simple function to mimic touch command
+    simple function to create a new file on system
     """
     file_name = file_name.replace('\n', '')
     subprocess.call(['touch', file_name])
@@ -77,11 +77,30 @@ def print_menu_option(s):
 
 def print_menu(name, lines):
     """
+    Function which prints a nice menu for the user (box thing)
+
+    ex:
+
+    **************************************
+    *          SSH Drive Manager         *
+    * 1) Remove Remote Drive             *
+    * 2) Add Drive to Mount              *
+    * 3) View Drives                     *
+    * 4) Exit                            *
+    **************************************
 
     """
+    if not len(name) % 2 == 0:
+        name = name + " "
+    spaces = len(TOP_BAR) - 4 - len(name)
+
     print(print_magenta(TOP_BAR))
-    print(print_magenta("*") + "         " + 
-    print_green(name) + "        " + print_magenta("*"))
+
+    print(print_magenta("*") + 
+        (int(spaces/2) * " ") + 
+        print_green(name) + 
+        (int(spaces/2) * " ") + 
+        print_magenta("*"))
 
     for s in lines:
         print_menu_option(s)
