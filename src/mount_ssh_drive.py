@@ -4,7 +4,6 @@ Jeffery Russell
 """
 
 import subprocess
-import collections
 import sys
 
 import module
@@ -94,7 +93,8 @@ def remove_drive():
         f.close()
 
 
-def add_drive_to_config(remote_connection, remote_mount_point, local_mount_point):
+def add_drive_to_config(remote_connection, remote_mount_point,
+                        local_mount_point):
     """
     Adds a new network drive to the default mount config file
     """
