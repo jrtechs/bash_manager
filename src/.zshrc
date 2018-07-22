@@ -89,6 +89,7 @@ alias ss="python3 /home/jeff/scripts/bash_manager/src/ssh_manager.py"
 alias ssh_manager="python3 /home/jeff/scripts/bash_manager/src/ssh_manager.py"
 alias quote="python3 /home/jeff/scripts/bash_manager/src/quote.py"
 alias ls="ls -abp --color=auto"
+alias imgo="sh /home/jeff/scripts/bash_manager/scripts/optimizeImages.sh"
 
 function cd {
     builtin cd "$@" && ls
