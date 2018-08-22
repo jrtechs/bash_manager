@@ -8,6 +8,7 @@ import collections
 
 import module
 import configuration
+import mount_ssh_drive
 
 INPUT_FILE = configuration.get_config()["servers"]
 
@@ -39,6 +40,7 @@ def main():
     menu.append("A) Exit")
     menu.append("B) Manager tools")
     menu.append("C) Socks Tunnel")
+    menu.append("D) SSH Drive Manager")
 
     module.print_menu("SSH manager V 1.0", menu)
 
@@ -50,6 +52,8 @@ def main():
         sub_menu()
     elif "c" == str.lower(i):
         socks_ssh_tunnel()
+    elif "d" == str.lower(i):
+        mount_ssh_drive.main()
     else:
         for c in cmp:
             if int(i) == c.menu_id:
@@ -98,10 +102,10 @@ def print_sub_menu():
     :return: None
     """
     module.print_menu("Options", ["1) Add Host",
-                                        "2) Copy SSH key to server",
-                                        "3) Remove host name",
-                                        "4) Return to ssh manager",
-                                        "5) Exit"])
+                                "2) Copy SSH key to server",
+                                "3) Remove host name",
+                                "4) Return to ssh manager",
+                                "5) Exit"])
 
 
 def print_red(prt): return "\033[91m {}\033[00m" .format(prt)
