@@ -136,7 +136,8 @@ def print_mount_menu():
                                             "4) Add Drive to Mount",
                                             "5) View Drives",
                                             "6) Usage",
-                                            "7) Exit"])
+                                            "7) Manage Config",
+                                            "8) Exit"])
 
 
 def manage_mount_file():
@@ -145,7 +146,7 @@ def manage_mount_file():
     """
     print_mount_menu()
     i = input("Enter Option:")
-    while i != '7':
+    while i != '8':
         if i == '4':
             add_drive()
         elif i == '3':
@@ -158,9 +159,10 @@ def manage_mount_file():
             unmount_all_drives()
         elif i == '6':
             print_usage()
+        elif i == '7':
+            configuration.main()
         else:
             print("Invalid Option")
-
         if i != '1' and i != '2':
             print_mount_menu()
             i = input("Enter Option:")

@@ -14,8 +14,6 @@ config dictionary
 {servers: "/", quotes: "/", mounts:"/"}
 """
 
-import subprocess
-import collections
 import os.path
 
 import module
@@ -68,7 +66,6 @@ def read_config():
     Reads the config file and creates a config dictionary
     """
     config = {}
-    temp = []
     with open(CONFIG_FILE) as file:
         for line in file:
             temp = line.split(" ")
@@ -99,6 +96,7 @@ def valid_config(config):
     Checks to see if a configuration is valid
     """
     return 'servers' in config and 'quotes' in config and 'mounts' in config
+
 
 def create_config_dependent_files(config):
     """

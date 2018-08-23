@@ -17,7 +17,6 @@ Computer = collections.namedtuple("Computer", ('host', 'menu_id'))
 WELCOME_MESSAGE = "**************************************"
 
 
-
 def main():
     """
     This function inputs all the available hosts from a text file and 
@@ -95,7 +94,6 @@ def socks_ssh_tunnel():
                 exit_program()
 
 
-
 def print_sub_menu():
     """
     prints out a sub help menu for other options
@@ -105,7 +103,8 @@ def print_sub_menu():
                                 "2) Copy SSH key to server",
                                 "3) Remove host name",
                                 "4) Return to ssh manager",
-                                "5) Exit"])
+                                "5) Manage Configuration and Bash",
+                                "6) Exit"])
 
 
 def print_red(prt): return "\033[91m {}\033[00m" .format(prt)
@@ -125,7 +124,8 @@ def sub_menu():
                    2: copy_ssh_key,
                    3: remove_host,
                    4: main,
-                   5: exit_program,
+                   5: configuration.main(),
+                   6: exit_program,
                    }
         options[int(i)]()
     else:
