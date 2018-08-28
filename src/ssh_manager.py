@@ -119,13 +119,13 @@ def sub_menu():
     print_sub_menu()
     i = input("Enter selection:")
 
-    if i != '' and int(i) in {1, 2, 3, 4, 5}:
+    if i != '' and int(i) in {1, 2, 3, 4, 5, 6}:
         options = {1: add_host,
                    2: copy_ssh_key,
                    3: remove_host,
                    4: main,
-                   5: configuration.main(),
-                   6: exit_program,
+                   5: configuration.main,
+                   6: exit_program
                    }
         options[int(i)]()
     else:

@@ -121,7 +121,8 @@ you can use the "2" option to copy your ssh key to a server.
 
 "4" Returns to the main manager window.
 
-""
+"5" Edits the configuration which stores where this program keeps text documents
+for the hosts used.
 
 If you added some accounts your main window should look like this:
 
