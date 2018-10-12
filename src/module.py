@@ -18,6 +18,13 @@ def input_file(file_name):
             f.append(line.strip(' \t\n\r'))
     return f
 
+def check_file_exists(fileloc):
+    """
+    Function which checks to see if a file exists
+    :return: whether file exists
+    """
+    return os.path.exists(fileloc)
+
 
 def append_file(file_name, append):
     """
