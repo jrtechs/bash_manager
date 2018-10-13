@@ -1,0 +1,12 @@
+#! /usr/bin/bash
+
+#Created by Jake Zaia
+
+#The contents of this file should be copied to ~/.bash_aliases
+  #One could also use this file, but theabove method is preferred.
+
+alias aa='git add .'
+alias pull='git pull && ls'
+alias push='git push'
+alias commit='git commit -am '
+alias hi='echo potato'
