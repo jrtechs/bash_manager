@@ -36,9 +36,12 @@ esc="\e"
 	ITALOFF="${esc}[23m"
 	UNDERON="${esc}[4m"
 	UNDEROFF="${esc}[24m"
+	BLINK="${esc}[5m"
+	STATIC="${esc}[25m"
 	INVON="${esc}[7m"
 	INVOFF="${esc}[27m"
+	RESET="${esc}[0m"
 
 }
 
-reset="${esc}[0m"
+echo $RESET
