@@ -7,15 +7,15 @@ Manages SSH config files, and supports a more user-friendly terminal based way o
 
 import os
 
-#This is the location of where the SSH 
-SSH_CONFIG_FILE_LOC = '~/.ssh/config'
+#This is the location of where the SSH
+SSH_CONFIG_FILE_LOC = os.path.expanduser('~/.ssh/config')
 
 
 def config_exists():
     """
     Checks if an SSH config file exists at the desired path
     """
-    return os.path.exists(SSH_CONFIG_FILE_LOC)
+    return os.path.isfile(SSH_CONFIG_FILE_LOC)
 
 def get_config():
     """
@@ -45,7 +45,7 @@ def create_config():
         port = input("Port number: ")
     else:
         port = None
-    
+
     #SSH public key location is optional
     identityfile = input("Would you like to specify an ssh public key location?(y/N)")
     if (identityfile == 'y' or identityfile == 'Y' or identityfile.lower() =='yes'):
