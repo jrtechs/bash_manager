@@ -66,6 +66,29 @@ def unmount_all_drives():
         unmount_drive(file[i + 2])
 
 
+def forcefully_unmount_drive(local_mount_point):
+    """
+    Forcefully un-mounts a ssh drive
+    :param local_mount_point:
+    :return:
+    """
+    runCode = subprocess.call(["sudo","umount", "-l", local_mount_point])
+    if runCode == 0:
+        print("Un-Mounted " + local_mount_point)
+    else:
+        print("Failed to Un-Mount " + local_mount_point)
+
+
+def forcefully_unmount_drives():
+    """
+    Forcefully un-mounts all drives from the system
+    :return:
+    """
+    file = module.input_file(MOUNT_FILE)
+    for i in range(0, len(file), 3):
+        forcefully_unmount_drive(file[i + 2])
+
+
 def remove_drive():
     """
     Prompts the user and removes a drive from MOUNT_FILE
@@ -137,7 +160,8 @@ def print_mount_menu():
                                             "5) View Drives",
                                             "6) Usage",
                                             "7) Manage Config",
-                                            "8) Exit"])
+                                            "8) Forcefully Un-Mount SSH Drives",
+                                            "9) Exit"])
 
 
 def manage_mount_file():
@@ -146,7 +170,7 @@ def manage_mount_file():
     """
     print_mount_menu()
     i = input("Enter Option:")
-    while i != '8':
+    while i != '9':
         if i == '4':
             add_drive()
         elif i == '3':
@@ -157,6 +181,8 @@ def manage_mount_file():
            mount_drives()
         elif i == '2':
             unmount_all_drives()
+        elif i == '8':
+            forcefully_unmount_drives()
         elif i == '6':
             print_usage()
         elif i == '7':
