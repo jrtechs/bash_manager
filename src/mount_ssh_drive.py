@@ -6,7 +6,7 @@ Jeffery Russell
 import subprocess
 import sys
 
-import module
+from utils import module
 import configuration
 
 

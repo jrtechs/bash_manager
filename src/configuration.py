@@ -16,7 +16,7 @@ config dictionary
 
 import os.path
 
-import module
+from utils import module
 
 CONFIG_FILE = os.path.dirname(__file__) + "/config.txt"
 

@@ -6,6 +6,8 @@ Jeffery Russell
 
 import sys
 
+from utils import print_message_bubble
+
 
 def main():
     """
@@ -32,7 +34,8 @@ def roo_say(message):
     :param message: the message to print
     :return: none
     """
-    print_message(message)
+    print_message_bubble.print_message(message)
+    #print_message(message)
     print_roo()
 
 

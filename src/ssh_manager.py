@@ -6,7 +6,7 @@ Jeffery Russell
 import subprocess
 import collections
 
-import module
+from utils import module
 import configuration
 import mount_ssh_drive
 

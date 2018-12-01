@@ -9,7 +9,7 @@ Jeffery Russell
 import random
 import sys
 
-import module
+from utils import module
 import roosay
 import configuration
 
