@@ -17,7 +17,6 @@
 
 roosay is a simple python script which displays an ascii roo with a quote above it
 
-
 ## Usage
 ```
 python3 roosay.py Super cool message

@@ -8,8 +8,12 @@ Jeffery Russell
 
 import random
 import sys
+import os.path
+
+import glob
 
 from utils import module
+from utils import print_message_bubble
 import roosay
 import configuration
 
@@ -17,14 +21,21 @@ import configuration
 """Path to a text file containing quotes"""
 INPUT_FILE = configuration.get_config()["quotes"]
 
+"""Pulls a list of the ascii art file names"""
+BASE_FILE = os.path.dirname(__file__)
+ASCII_ART = glob.glob(BASE_FILE + "/asciiArt/*.txt")
 
-def print_roosay_message(message):
+
+def print_message(message):
     """
-    Calls the roosay command that prints an ascii roo with a message above it
+    Prints a dialog box with a message in it with an ascii
+    animal below it
     :param message: a quote to print
-    :return:
+    :return: NA
     """
-    roosay.roo_say(message)
+    print_message_bubble.print_message(message)
+    print(module.input_file_with_new_line(
+        ASCII_ART[random.randint(0,(len(ASCII_ART) -1))]))
 
 
 def print_usage():
@@ -75,7 +86,7 @@ def main():
         if len(quotes) == 0:
             print("Quotes file : " + INPUT_FILE + " is empty.")
         else:
-            print_roosay_message(quotes[random.randint(0,(len(quotes) -1))])
+            print_message(quotes[random.randint(0,(len(quotes) -1))])
 
 
 """

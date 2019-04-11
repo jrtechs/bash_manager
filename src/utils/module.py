@@ -18,6 +18,18 @@ def input_file(file_name):
             f.append(line.strip(' \t\n\r'))
     return f
 
+
+def input_file_with_new_line(file_name):
+    """
+    Reads an entire file and returns the contents as a string
+    """
+    f = ""
+    with open(file_name.strip('\n')) as file:
+        for line in file:
+            f = f + line
+    return f
+
+
 def check_file_exists(fileloc):
     """
     Function which checks to see if a file exists
