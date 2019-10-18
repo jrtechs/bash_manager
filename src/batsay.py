@@ -1,6 +1,6 @@
 import roosay
 import sys
-
+import pyfiglet
 def main():
     """
     checks for command line arguments
@@ -45,3 +45,6 @@ def print_bat():
 
 if __name__ == '__main__':
     main()
+def thanks_and_exit():
+    print(pyfiglet.figlet_format('Thank you',font='slant'))
+    sys.exit()
