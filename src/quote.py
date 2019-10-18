@@ -14,7 +14,6 @@ import glob
 
 from utils import module
 from utils import print_message_bubble
-import roosay
 import configuration
 
 
@@ -22,20 +21,28 @@ import configuration
 INPUT_FILE = configuration.get_config()["quotes"]
 
 """Pulls a list of the ascii art file names"""
-BASE_FILE = os.path.dirname(__file__)
+BASE_FILE = os.path.dirname(os.path.realpath(__file__))
 ASCII_ART = glob.glob(BASE_FILE + "/asciiArt/*.txt")
 
 
-def print_message(message):
+def print_message(message, ascii_file = None):
     """
     Prints a dialog box with a message in it with an ascii
     animal below it
     :param message: a quote to print
+    :param ascii_file: the file location of the ascii art speaking the message
     :return: NA
     """
     print_message_bubble.print_message(message)
-    print(module.input_file_with_new_line(
-        ASCII_ART[random.randint(0,(len(ASCII_ART) -1))]))
+    if ascii_file != None:
+        filepath = '/'.join(INPUT_FILE.split('/')[:-1])
+        filepath += "/asciiArt/" + ascii_file
+        f = open(filepath, 'r')
+        print(f.read())
+        f.close()
+    else:
+        print(module.input_file_with_new_line(
+            ASCII_ART[random.randint(0,(len(ASCII_ART) -1))]))
 
 
 def print_usage():
@@ -78,6 +85,9 @@ def main():
                 add_quote()
             else:
                 print("You forgot to enter a quote.")
+        elif sys.argv[1][:2] == "--":
+            quotes = module.input_file(INPUT_FILE)
+            print_message(quotes[random.randint(0,(len(quotes) -1))], ascii_file=sys.argv[1][2:]+'.txt')
         else:
             print_usage()
     else:
