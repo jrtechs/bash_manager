@@ -37,9 +37,13 @@ def print_message(message, ascii_file = None):
     if ascii_file != None:
         filepath = '/'.join(INPUT_FILE.split('/')[:-1])
         filepath += "/asciiArt/" + ascii_file
-        f = open(filepath, 'r')
-        print(f.read())
-        f.close()
+        if (os.path.exists(filepath)):
+            f = open(filepath, 'r')
+            print(f.read())
+            f.close()
+        else:
+            print(module.input_file_with_new_line(
+                ASCII_ART[random.randint(0,(len(ASCII_ART) -1))]))
     else:
         print(module.input_file_with_new_line(
             ASCII_ART[random.randint(0,(len(ASCII_ART) -1))]))
