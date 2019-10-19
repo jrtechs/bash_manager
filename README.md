@@ -71,8 +71,8 @@ You can edit your bash configuration with an alias to make it easier to execute.
 alias ss="python3 /path/to/this/file/ssh_manager.py"
 ```
 
-To make this easier, the confuguation manager of this program will has the option to
-append this and a few other aliases to your bash manager. This will autobatically
+To make this easier, the configuation manager of this program will has the option to
+append this and a few other aliases to your bash manager. This will automatically
 use the location of the scripts in the file.
   
 The first time you run this program it will ask you for the locations where you want to store
