@@ -2,9 +2,9 @@
 
 ```
 
--------------
+ /-----------\
 < Only at RIT >
--------------
+ \-----------/
 
           \    /)/)
            \  (ø.ø)
@@ -27,6 +27,7 @@ roosay super cool message
 ```
 
 # Install
+Use git to clone this project onto your system. A one-command installation can be done using the `git clone` 
 ```
 git clone https://github.com/jrtechs/bash_manager.git
 ```
