@@ -174,3 +174,7 @@ This manager makes it easier to mount ssh drives using the "fusermount" command.
  * 8) Exit                            *
  **************************************
 ```
+
+#  Benifits
+
+This SSH manager will help to manage everything easily without any fails.
