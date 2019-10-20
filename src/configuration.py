@@ -7,11 +7,12 @@ Deals with the configuration file for bash manager
 Config file:
 servers: /path/to/servers
 quotes: /path/to/quotes.txt
+forward: /path/to/forwards.txt
 mounts: /path/to/ssh/mounts.txt
 
 
 config dictionary
-{servers: "/", quotes: "/", mounts:"/"}
+{servers: "/", quotes: "/", forwards: "/", mounts:"/"}
 """
 
 import os.path
@@ -57,6 +58,7 @@ def create_config():
     f = open(CONFIG_FILE, "w")
     f.write(single_conf_input("servers") + '\n')
     f.write(single_conf_input("quotes") + '\n')
+    f.write(single_conf_input("forwards")+ '\n')
     f.write(single_conf_input("mounts") + '\n')
     f.close()
 
@@ -83,6 +85,12 @@ def read_config():
                     print("Error reading quotes file from config")
                     return
                 config["quotes"] = temp[1]
+
+            if line.find("forwards:") != -1:
+                if len(temp) <= 1:
+                    print("Error reading forwards file from config")
+                    return
+                config["forwards"] = temp[1]
             if line.find("mounts:") != -1:
                 if len(temp) <= 1:
                     print("Error reading mounts file from config")
@@ -95,7 +103,7 @@ def valid_config(config):
     """
     Checks to see if a configuration is valid
     """
-    return 'servers' in config and 'quotes' in config and 'mounts' in config
+    return 'servers' in config and 'quotes' in config and 'forwards' in config and 'mounts' in config
 
 
 def create_config_dependent_files(config):
@@ -108,6 +116,9 @@ def create_config_dependent_files(config):
     if os.path.isfile(config["quotes"]) == False:
         print("Creating missing quotes file in " + config["quotes"])
         module.create_empty_file(config["quotes"])
+    if os.path.isfile(config["forwards"]) == False:
+        print("Creating missing forwards file in " + config["forwards"])
+        module.create_empty_file(config["forwards"])
     if os.path.isfile(config["mounts"]) == False:
         print("Creating missing mounts file in " + config["mounts"])
         module.create_empty_file(config["mounts"])

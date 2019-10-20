@@ -9,9 +9,10 @@ import collections
 from utils import module
 import configuration
 import mount_ssh_drive
+import os
 
 INPUT_FILE = configuration.get_config()["servers"]
-
+FORWARD_FILE = configuration.get_config()["forwards"]
 Computer = collections.namedtuple("Computer", ('host', 'menu_id'))
 
 WELCOME_MESSAGE = "**************************************"
@@ -40,6 +41,7 @@ def main():
     menu.append("B) Manager tools")
     menu.append("C) Socks Tunnel")
     menu.append("D) SSH Drive Manager")
+    menu.append("E) Local Port Forwarding")
 
     module.print_menu("SSH manager V 1.0", menu)
 
@@ -53,6 +55,8 @@ def main():
         socks_ssh_tunnel()
     elif "d" == str.lower(i):
         mount_ssh_drive.main()
+    elif "e" == str.lower(i):
+        port_forwarding_sub_menu()
     else:
         for c in cmp:
             if int(i) == c.menu_id:
@@ -203,6 +207,104 @@ def remove_host():
         for c in cmp:
             if c.menu_id == int(host):
                 module.remove_line_from_file(INPUT_FILE, c.host)
+
+def add_forward_config():
+    """
+    appends new local forward configurations to forwards.txt
+    :return: None
+    """
+    forwardingConfig = input("Enter forwarding config to add or -1 to exit:")
+    if forwardingConfig != '-1':
+        module.append_file(FORWARD_FILE, forwardingConfig)
+
+
+def del_forward_config():
+    """
+    removes a local forward configurations from forwards.txt
+    :return: None
+    """
+    # check if file is empty before trying to open to read file
+    if (os.stat(FORWARD_FILE).st_size == 0):
+        print(print_red("*" * len(WELCOME_MESSAGE)))
+        print("No forward configurations are available for removal.")
+        print(print_red("*" * len(WELCOME_MESSAGE)))
+
+    else:
+        f = open(FORWARD_FILE, "r")
+        i = 1
+        savedConfigs = []
+        print(print_red("*" * len(WELCOME_MESSAGE)))
+        print("Current saved local port forwarding configurations:")
+        for line in f:
+            print(print_red("*") + "%s) %s" % (i, line) + print_red("*"))
+            savedConfigs.append(line.strip())
+            i += 1
+        print(print_red("*" * len(WELCOME_MESSAGE)))
+        selection = input("Select a configuration to delete: ")
+        module.remove_line_from_file(FORWARD_FILE, savedConfigs[int(selection)-1])
+
+def select_forward_config():
+    """
+    Select a local forwarding configuration from forwards.txt
+    to execute using SSH
+    :return: None
+    """
+    # check if file is empty before trying to open to read file
+    if (os.stat(FORWARD_FILE).st_size == 0):
+        print(print_red("*" * len(WELCOME_MESSAGE)))
+        print("No forward configurations are available to run.")
+        print(print_red("*" * len(WELCOME_MESSAGE)))
+
+    else:
+        f = open(FORWARD_FILE, "r")
+        i = 1
+        savedConfigs = []
+        print(print_red("*" * len(WELCOME_MESSAGE)))
+        print("Current saved local port forwarding configurations:")
+        for line in f:
+            print(print_red("*") + "%s) %s" % (i, line) + print_red("*"))
+            savedConfigs.append(line.strip())
+            i += 1
+        print(print_red("*" * len(WELCOME_MESSAGE)))
+        selection = input("Select a configuration to execute: ")
+
+        #Split the selected entry based on a space so we can feed each
+        #element into the subprocess call
+        forwardConfig = savedConfigs[int(selection)-1].split(" ")
+        subprocess.call(["ssh", "-tt", "-L", forwardConfig[0], forwardConfig[1]])
+        exit_program()
+
+def print_forwarding_sub_menu():
+    """
+    prints out a sub help menu for other forwarding options  
+    :return: None
+    """
+    module.print_menu("Options", ["1) Add local forward configuration",
+                                  "2) Remove local forward configuration",
+                                  "3) Select local forward configuration",
+                                  "4) Exit"])
+
+def port_forwarding_sub_menu():
+    """
+
+    print out a sub menu related to port forwarding
+    options
+    :return: None
+    """
+    print_forwarding_sub_menu()
+
+    i = input("Enter selection:")
+    if i != "" and (int(i) in {1, 2, 3, 4}):
+        options = {1: add_forward_config,
+                   2: del_forward_config,
+                   3: select_forward_config,
+                   4: exit_program
+                   }
+        options[int(i)]()
+    else:
+        print("Invalid selection!") 
+
+    port_forwarding_sub_menu()
 
 
 """
