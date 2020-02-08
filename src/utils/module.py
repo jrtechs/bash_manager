@@ -113,8 +113,8 @@ def print_menu(name, lines):
 
     """
     padding_star = "*" * 5
-    temp = 0
-    max_len = 0
+    temp = 31
+    max_len = 31
     for s in lines:
         temp = len(s)
         if max_len < temp:
