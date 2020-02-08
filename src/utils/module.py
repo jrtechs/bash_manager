@@ -74,26 +74,27 @@ def create_empty_file(file_name):
     subprocess.call(['touch', file_name])
 
 
-TOP_BAR = "**************************************"
+# TOP_BAR = "********************************************"
+# TOP_BAR =
 
 
-def print_magenta(prt): return"\033[95m {}\033[00m" .format(prt)
+def print_magenta(prt): return "\033[95m {}\033[00m".format(prt)
 
 
-def print_green(prt): return "\033[92m {}\033[00m" .format(prt)
+def print_green(prt): return "\033[92m {}\033[00m".format(prt)
 
 
-def print_red(prt): return "\033[91m {}\033[00m" .format(prt)
+def print_red(prt): return "\033[91m {}\033[00m".format(prt)
 
 
-def print_menu_option(s):
+def print_menu_option(s, top_bar_length):
     """
     Prints each host option
     :param s:
     :return:
     """
-    space = " " * (len(TOP_BAR) - 4 - len(s))
-    print(print_magenta("* ") + s + space + print_magenta("*"))  
+    space = " " * (top_bar_length - 4 - len(s))
+    print(print_magenta("* ") + s + space + print_magenta("*"))
 
 
 def print_menu(name, lines):
@@ -111,18 +112,27 @@ def print_menu(name, lines):
     **************************************
 
     """
+    padding_star = "*" * 5
+    temp = 0
+    max_len = 0
+    for s in lines:
+        temp = len(s)
+        if max_len < temp:
+            max_len = temp
+    TOP_BAR = padding_star + "*" * max_len + padding_star
     if not len(name) % 2 == 0:
-        name = name + " "
+        name = name + "  "
+    name = name + " "
     spaces = len(TOP_BAR) - 4 - len(name)
 
     print(print_magenta(TOP_BAR))
 
-    print(print_magenta("*") + 
-        (int(spaces/2) * " ") + 
-        print_green(name) + 
-        (int(spaces/2) * " ") + 
-        print_magenta("*"))
+    print(print_magenta("*") +
+          (int(spaces / 2) * " ") +
+          print_green(name) +
+          (int(spaces / 2) * " ") +
+          print_magenta("*"))
 
     for s in lines:
-        print_menu_option(s)
+        print_menu_option(s, len(TOP_BAR))
     print(print_magenta(TOP_BAR))
