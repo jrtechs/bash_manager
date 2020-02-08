@@ -41,7 +41,7 @@ def main():
     menu.append("C) Socks Tunnel")
     menu.append("D) SSH Drive Manager")
 
-    module.print_menu("SSH manager V 1.0", menu)
+    module.print_menu("SSH manager V 1.0 ", menu)
 
     i = input("Enter Option:")
 

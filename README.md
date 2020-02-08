@@ -44,15 +44,15 @@ Make sure that you have the following programs installed.
 
 # SSH Manager
 ```
-**************************************
-*         SSH manager V 1.1          *
-* 1) user1@host_name                 *
-* 2) user2@host_name_2               *
-* A) Exit                            *
-* B) Manager tools                   *
-* C) Socks Tunnel                    *
-* D) SSH Drive Manager               *
-**************************************
+ *****************************************
+ *          SSH manager V 1.0            *
+ * 1) user1@name                         *
+ * 2) user2@host_name_2                  *
+ * A) Exit                               *
+ * B) Manager tools                      *
+ * C) Socks Tunnel                       *
+ * D) SSH Drive Manager                  *
+ *****************************************
 ```
 
 ## About
@@ -72,7 +72,7 @@ You can edit your bash configuration with an alias to make it easier to execute.
 alias ss="python3 /path/to/this/file/ssh_manager.py"
 ```
 
-To make this easier, the configuation manager of this program will has the option to
+To make this easier, the configuration manager of this program will has the option to
 append this and a few other aliases to your bash manager. This will automatically
 use the location of the scripts in the file.
   
@@ -84,13 +84,13 @@ it in the same directory as the source code.
 ## Usage
 After you accept the configuration you will see something like this.
 ````
-**************************************
-*         SSH manager V 1.1          *
-* A) Exit                            *
-* B) Manager tools                   *
-* C) Socks Tunnel                    *
-* D) SSH Drive Manager               *
-**************************************
+ *****************************************
+ *          SSH manager V 1.0            *
+ * A) Exit                               *
+ * B) Manager tools                      *
+ * C) Socks Tunnel                       *
+ * D) SSH Drive Manager                  *
+ *****************************************
 
 **************************************
 ````
@@ -100,15 +100,15 @@ read any documentation. However...
 Typing B will pull up this menu:
 
 ````
- **************************************
- *              Options               *
- * 1) Add Host                        *
- * 2) Copy SSH key to server          *
- * 3) Remove host name                *
- * 4) Return to ssh manager           *
- * 5) Manage Configuration and Bash   *
- * 6) Exit                            *
- **************************************
+ ******************************************
+ *               Options                  *
+ * 1) Add Host                            *
+ * 2) Copy SSH key to server              *
+ * 3) Remove host name                    *
+ * 4) Return to ssh manager               *
+ * 5) Manage Configuration and Bash       *
+ * 6) Exit                                *
+ ******************************************
 Enter selection:
 ````
 This is where you can run the add host names to the manager -- same as adding them to
@@ -127,15 +127,15 @@ for the hosts used.
 If you added some accounts your main window should look like this:
 
 ````
-**************************************
-*         SSH manager V 1.1          *
-* 1) user1@host_name                 *
-* 2) user2@host_name_2               *
-* A) Exit                            *
-* B) Manager tools                   *
-* C) Socks Tunnel                    *
-* D) SSH Drive Manager               *
-**************************************
+ *****************************************
+ *          SSH manager V 1.0            *
+ * 1) user1@name                         *
+ * 2) user2@host_name_2                  *
+ * A) Exit                               *
+ * B) Manager tools                      *
+ * C) Socks Tunnel                       *
+ * D) SSH Drive Manager                  *
+ *****************************************
 ````
 
 Now is the easy part. Simply enter the number of the computer you wish to connect to
@@ -145,13 +145,13 @@ If you are interested in doing lots of socks proxies -- for whatever reason.
 From the main menu type "C".
 
 ````
-**************************************
-*         Socks Tunnel               *
-* 1) user1@host_name                 *
-* 2) user2@host_name_2               *
-* A) Exit                            *
-* B) Main                            *
-**************************************
+ *****************************************
+ *             Socks Tunnel              *
+ * 1) user1@host_name                    *
+ * 2) user2@host_name_2                  *
+ * A) Exit                               *
+ * B) Main                               *
+ *****************************************
 ````
 
 Now whichever computer you select, it will open a socks proxy. To use the proxy use
@@ -163,19 +163,62 @@ localhost and port 8123.
 This manager makes it easier to mount ssh drives using the "fusermount" command.
 
 ```
- **************************************
- *         SSH Drive Manager          *
- * 1) Mount SSH Drives                *
- * 2) Un-Mount SSH Drives             *
- * 3) Remove Remote Drive             *
- * 4) Add Drive to Mount              *
- * 5) View Drives                     *
- * 6) Usage                           *
- * 7) Manage Config                   *
- * 8) Exit                            *
- **************************************
+ *******************************************
+ *           SSH Drive Manager             *
+ * 1) Mount SSH Drives                     *
+ * 2) Un-Mount SSH Drives                  *
+ * 3) Remove Remote Drive                  *
+ * 4) Add Drive to Mount                   *
+ * 5) View Drives                          *
+ * 6) Usage                                *
+ * 7) Manage Config                        *
+ * 8) Forcefully Un-Mount SSH Drives       *
+ * 9) Exit                                 *
+ *******************************************
 ```
 
-#  Benifits
+#  Benefits
 
 This SSH manager will help to manage everything easily without any fails.
+
+#  Quote
+
+This is a utility for printing ASCII art with a quote above it. The 
+quotes are added to quote.txt and are selected at random with
+each run.
+
+```
+ ---------
+< hi rose >
+ ---------
+             \
+     /\       \         /\
+    / \\'._   (\_/)   _.'/ \
+    |.''._'--(o.o)--'_.''.|
+     \_ / `;=/ " \=;` \ _/
+       `\__| \___/ |__/`
+            \(_|_)/
+             " ` "
+```
+
+```
+ -------------
+< hello world >
+ -------------
+     \
+      \
+       \  .-.
+        \(o.o)
+          |=|
+         __|__
+       //.=|=.\\
+      // .=|=. \\
+      \\ .=|=. //
+       \\(_=_)//
+        (:| |:)
+         || ||
+         () ()
+         || ||
+         || ||
+        ==' '==
+```
