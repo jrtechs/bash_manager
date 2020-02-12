@@ -153,7 +153,7 @@ def print_mount_menu():
     """
     Displays box which has mount menu options
     """
-    module.print_menu("SSH Drive Manager", ["1) Mount SSH Drives",
+    module.print_menu("SSH Drive Manager ", ["1) Mount SSH Drives",
                                             "2) Un-Mount SSH Drives",
                                             "3) Remove Remote Drive",
                                             "4) Add Drive to Mount",
