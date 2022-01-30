@@ -57,6 +57,8 @@ def print_usage():
     print("Usage:")
     print("\t-a quote \t: Adds a quote to the quotes list")
     print("\t-h \t\t: Prints usage message")
+    print("\t--<ASCII image to use> : name of a file (excluding extension) in "
+            "the \"asciiArt\" directory to use for the ASCII image")
 
 
 def add_quote():
