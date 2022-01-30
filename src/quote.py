@@ -57,6 +57,7 @@ def print_usage():
     print("Usage:")
     print("\t-a quote \t: Adds a quote to the quotes list")
     print("\t-h \t\t: Prints usage message")
+    print("\t-q quote \t: Print this quote")
     print("\t--<ASCII image to use> : name of a file (excluding extension) in "
             "the \"asciiArt\" directory to use for the ASCII image")
 
@@ -91,6 +92,12 @@ def main():
                 add_quote()
             else:
                 print("You forgot to enter a quote.")
+        elif sys.argv[1].lower() == '-q':
+            if len(sys.argv) > 2:
+                quote = ' '.join(sys.argv[2:])
+                print_message(quote)
+            else:
+                print('You forgot to enter a quote.')
         elif sys.argv[1][:2] == "--":
             quotes = module.input_file(INPUT_FILE)
             print_message(quotes[random.randint(0,(len(quotes) -1))], ascii_file=sys.argv[1][2:]+'.txt')
