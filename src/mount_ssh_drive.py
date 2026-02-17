@@ -24,7 +24,7 @@ def mount_drive(remote_connection, remote_mount_point, local_mount_point):
     """
     Calls sshfs to mount a remote connection on a local mount point over ssh
     """
-    runCode = subprocess.call(["sshfs", "-o", "allow_other", 
+    runCode = subprocess.call(["sshfs", "-o", "allow_other,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,compression=yes", 
             remote_connection + ":" + remote_mount_point, local_mount_point])
     if runCode == 0:
         print("Mounted "  + remote_connection + ":" + remote_mount_point + 
