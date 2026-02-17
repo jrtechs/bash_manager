@@ -31,6 +31,7 @@ def mount_drive(remote_connection, remote_mount_point, local_mount_point):
             " to " + local_mount_point)
     else:
         print("Failed to mount " + remote_connection + ":" + remote_mount_point)
+        sys.exit(runCode)
 
 
 def mount_drives():
@@ -203,7 +204,8 @@ def print_usage():
     print("Usage:")
     print("\t-m mounts drives to computer")
     print("\t-u unmounts drives from the computer")
-
+    print("\t-f forcibly unmounts all drives from the computer")
+    
 
 def main():
     """
@@ -214,6 +216,8 @@ def main():
             mount_drives()
         elif sys.argv[1].lower() == "-u":
             unmount_all_drives()
+        elif sys.argv[1].lower() == "-f":
+            forcefully_unmount_drives()
         else:
             print("Invalid Command")
             print_usage()
